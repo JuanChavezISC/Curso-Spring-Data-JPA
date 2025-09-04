@@ -1,5 +1,6 @@
 package com.jpa.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,4 +13,10 @@ import com.jpa.entity.Customer;
 public interface ICustomerRepository extends JpaRepository<Customer, Long>{
 
 	Optional<Customer>  findByFirstName(String firstName);
+	
+	List<Customer> findByFirstNameContaining(String firstName);
+	
+	List<Customer> findByLastNameNotNull();
+	
+	List<Customer> findByAddress_City(String city);
 }

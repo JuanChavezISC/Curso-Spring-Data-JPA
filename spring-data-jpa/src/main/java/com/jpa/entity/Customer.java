@@ -1,6 +1,7 @@
 package com.jpa.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -44,6 +45,11 @@ public class Customer {
 			nullable = false)
 	private String email;
 	
+//	private String customerCity;
+//	private String customerMainStreet;
+//	private String customerSecondaryStreet;
 
+	@Embedded // Indica que se incrusta la clase address dentro de la clase Customer
+	private Address address;
 	
 }
