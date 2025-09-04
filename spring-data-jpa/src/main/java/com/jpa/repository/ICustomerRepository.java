@@ -27,4 +27,12 @@ public interface ICustomerRepository extends JpaRepository<Customer, Long>{
 	
 	@Query("select c.firstName from Customer c where c.email =?1")
 	String getCustomerFirstNameByEmailAddress(String email);
+	
+	
+	// Consulta nativa
+	@Query(
+			value = "select *  from tbl_customer where email_address=?1",
+			nativeQuery = true
+	)
+	Customer getCustomerByEmailAddressNative(String email);
 }

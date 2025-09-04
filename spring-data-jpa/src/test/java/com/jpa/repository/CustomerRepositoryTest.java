@@ -91,4 +91,9 @@ public class CustomerRepositoryTest {
 		
 	}
 
+	@Test
+	public void getCustomerByEmailAddressNative() {
+		Customer customer = customerRepository.getCustomerByEmailAddressNative("axel@example.com");
+		System.out.println("customer = " + customer);
+	}
 }
