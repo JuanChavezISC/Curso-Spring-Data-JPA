@@ -76,5 +76,19 @@ public class CustomerRepositoryTest {
 		List<Customer> customerList = customerRepository.findByAddress_City("Cuenca");
 		customerList.forEach(System.out::println);
 	}
+	
+	@Test
+	public void getCustomerByEmailAddress() {
+		Customer customer = customerRepository.getCustomerByEmailAddress("alego@example.com");
+		System.out.println("customer = " + customer);
+		
+	}
+	
+	@Test
+	public void getCustomerFirstNameByEmailAddress() {
+		String firstName= customerRepository.getCustomerFirstNameByEmailAddress("ana.gomez@example.com");
+		System.out.println("customer = " + firstName);
+		
+	}
 
 }
