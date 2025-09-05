@@ -51,7 +51,7 @@ public class Local {
 			referencedColumnName = "managerId")
 	private Manager manager;
 	
-	@OneToMany(
+	@OneToMany( // en OneToMany su Fetch predeterminado es LAZY
 			cascade = CascadeType.ALL,
 			fetch = FetchType.EAGER
 	)
