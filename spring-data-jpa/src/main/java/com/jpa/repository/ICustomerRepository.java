@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.jpa.entity.Customer;
@@ -35,4 +36,11 @@ public interface ICustomerRepository extends JpaRepository<Customer, Long>{
 			nativeQuery = true
 	)
 	Customer getCustomerByEmailAddressNative(String email);
+	
+	@Query(
+			value = "select *  from tbl_customer where email_address= :emailAddress",
+			nativeQuery = true
+	)
+	Customer getCustomerByEmailAddressNativeNamedParam(@Param("emailAddress") String email);
+	
 }
