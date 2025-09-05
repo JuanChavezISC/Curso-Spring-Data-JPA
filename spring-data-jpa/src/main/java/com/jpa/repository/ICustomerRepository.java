@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jpa.entity.Customer;
 
@@ -42,5 +44,15 @@ public interface ICustomerRepository extends JpaRepository<Customer, Long>{
 			nativeQuery = true
 	)
 	Customer getCustomerByEmailAddressNativeNamedParam(@Param("emailAddress") String email);
+	
+	// Actualizacion de registros en la base de datos
+	@Transactional // Crea una transaccion para manejar la modificacion de datos y en caso
+	@Modifying // indica una modificacion dentro de la base de datos para mantener la consistencia de los datos 
+	@Query(
+			value = "update tbl_customer set first_name = ?1 where email_address = ?2",
+			nativeQuery= true
+	)
+	
+	void updateCustomerNameByEmail(String name, String email);
 	
 }
