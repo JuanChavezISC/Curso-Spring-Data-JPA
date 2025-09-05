@@ -1,5 +1,7 @@
 package com.jpa.entity;
 
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -7,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
@@ -39,12 +42,23 @@ public class Local {
 	
 	@OneToOne(
 			cascade = CascadeType.PERSIST,
-			fetch = FetchType.EAGER
+			fetch = FetchType.EAGER,
+			optional = false
 	)
 	
 	@JoinColumn(
 			name = "manager_id",
 			referencedColumnName = "managerId")
 	private Manager manager;
+	
+	@OneToMany(
+			cascade = CascadeType.ALL,
+			fetch = FetchType.EAGER
+	)
+	
+	@JoinColumn(
+			name = "local_id",
+			referencedColumnName = "localId")
+	private List<Order> orderList;
 	
 }

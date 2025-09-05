@@ -6,7 +6,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.jpa.entity.Address;
 import com.jpa.entity.Customer;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
