@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.jpa.entity.Customer;
 import com.jpa.entity.Local;
 import com.jpa.entity.Manager;
 import com.jpa.entity.Order;
@@ -63,7 +64,7 @@ class ILocalRepositoryTest {
 				.name("Cinema")
 				.floor("Third floor")
 				.manager(manager)
-				.orderList(List.of(order, order2))
+				//.orderList(List.of(order, order2))
 				.build();
 		
 		localRepository.save(local);
@@ -75,4 +76,42 @@ class ILocalRepositoryTest {
 		localList.forEach(System.out::println);
 	}
 
+	@Test
+	public void saveLocalWithCustomer() {
+		
+		Customer customer = Customer.builder()
+				.firstName("Carl")
+				.lastName("Jhonson")
+				.email("carl@example.com")
+				.build();
+		
+		Customer customer2 = Customer.builder()
+				.firstName("Eddie")
+				.lastName("Polanski")
+				.email("eddie@example.com")
+				.build();
+		
+		
+		Local local = Local.builder()
+				.name("Clukin ' Bell")
+				.floor("firstFloor")
+				.customerList(List.of(customer, customer2))
+				.build();
+
+		localRepository.save(local);
+	}
+	
+	@Test
+	public void findAllLocalsWithCustomer() {
+		List<Local> localList = localRepository.findAll();
+		localList.forEach(System.out::println);
+	}
+	
+	@Test
+	public void findCustomersByLocal() {
+		Local local = localRepository.findById(10L).get();
+		List<Customer> customerList = local.getCustomerList();
+		
+		System.out.println("customerList = " + customerList);
+	}
 }
